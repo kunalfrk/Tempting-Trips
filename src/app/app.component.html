@@ -1,0 +1,7 @@
+<app-aurora />
+<app-nav />
+@if (store.page() === 'booking') { <app-booking-flow /> }
+@if (store.page() === 'rides') { <app-rides /> }
+@if (store.page() === 'home') { <app-home /> }
+<app-toast />
+<app-auth-modal />

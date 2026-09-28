@@ -1,0 +1,27 @@
+<div class="part" [style.height.px]="h" [style.background]="bg">
+  <div class="part-glow"></div>
+  <div class="part-sun"></div>
+
+  <!-- landscape bands: stretched to fill any card width -->
+  <svg viewBox="0 0 280 150" preserveAspectRatio="none" class="part-svg">
+    <path [attr.d]="far" fill="rgba(255,255,255,0.22)" />
+    <path [attr.d]="mid" fill="rgba(8,11,20,0.24)" />
+
+    @if (water) {
+      <g stroke="rgba(255,255,255,0.38)" stroke-width="2.5" stroke-linecap="round">
+        <line x1="26" y1="130" x2="74" y2="130" />
+        <line x1="98" y1="136" x2="152" y2="136" />
+        <line x1="176" y1="132" x2="232" y2="132" />
+        <line x1="54" y1="143" x2="120" y2="143" />
+      </g>
+    }
+  </svg>
+
+  <!-- motif: fixed size, anchored to the right of the horizon so it never skews -->
+  <svg viewBox="0 0 120 80" preserveAspectRatio="xMidYMid meet" class="part-motif">
+    <g transform="translate(-170 -56)">
+      <path [attr.d]="motif" fill="none" stroke="rgba(8,11,20,0.55)" stroke-width="2.2"
+            stroke-linecap="round" stroke-linejoin="round" />
+    </g>
+  </svg>
+</div>

@@ -1,0 +1,74 @@
+<div class="rides container">
+  <button class="btn ghost sm back" (click)="store.goHome()">
+    <app-icon n="arrow" [s]="15" [style.transform]="'rotate(180deg)'" />Edit search
+  </button>
+
+  <div class="rides-head">
+    <div>
+      <h1 class="h2">Tour packages for {{ destLabel() }}</h1>
+      <p class="muted">{{ store.pickup() || 'Your city' }} → {{ destLabel() }} · {{ store.date() || 'Flexible dates' }} · {{ store.pax() }} traveller{{ store.pax() > 1 ? 's' : '' }}</p>
+    </div>
+    <app-select [opts]="sortOpts" [value]="store.pkgSort()" (valueChange)="store.pkgSort.set($any($event))" />
+  </div>
+
+  <div class="cat-row">
+    @for (c of store.pkgCategories(); track c) {
+      <button class="cat-pill" [class.act]="store.pkgCategory() === c" (click)="store.pkgCategory.set(c)">
+        {{ c === 'all' ? 'All packages' : c }}
+      </button>
+    }
+  </div>
+
+  <p class="muted result-count">{{ store.packages().length }} package{{ store.packages().length === 1 ? '' : 's' }} found</p>
+
+  @if (store.packages().length) {
+    <div class="pkg-grid">
+      @for (p of store.packages(); track p.id) {
+        <div class="pkg glass">
+          <div class="pkg-media">
+            <app-package-art [theme]="p.theme" [h]="150" />
+            @if (p.tag) { <span class="pkg-tag">{{ p.tag }}</span> }
+            <span class="pkg-days"><app-icon n="calendar" [s]="13" />{{ p.days }}D/{{ p.nights }}N</span>
+          </div>
+          <div class="pkg-body">
+            <div class="pkg-top">
+              <div class="pkg-title">{{ p.title }}</div>
+              <span class="chip">{{ p.category }}</span>
+            </div>
+            <div class="pkg-cities"><app-icon n="pin" [s]="13" />{{ p.cities.join(' · ') }}</div>
+
+            <div class="pkg-rating">
+              <app-icon n="star" [s]="14" [fill]="true" /><span>{{ p.rating }}</span>
+              <span class="muted">({{ p.reviews }} reviews)</span>
+            </div>
+
+            <ul class="pkg-highlights">
+              @for (h of p.highlights.slice(0, 3); track h) { <li>{{ h }}</li> }
+            </ul>
+
+            <div class="pkg-incl">
+              @for (i of p.inclusions; track i) { <span class="tag-soft">{{ i }}</span> }
+            </div>
+
+            <div class="pkg-foot">
+              <div>
+                <div class="pkg-price-row">
+                  <span class="price">{{ money(p.price) }}</span>
+                  <span class="pkg-orig">{{ money(p.origPrice) }}</span>
+                </div>
+                <div class="micro good">{{ discount(p) }}% off · per person</div>
+              </div>
+              <button class="btn primary sm" (click)="choose(p)">Book now<app-icon n="arrow" [s]="14" /></button>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  } @else {
+    <div class="glass pad empty-state">
+      <p class="muted">No packages match these filters yet. Try a different category.</p>
+    </div>
+  }
+
+  <div style="height:80px"></div>
+</div>

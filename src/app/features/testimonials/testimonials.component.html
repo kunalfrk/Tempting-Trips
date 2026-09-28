@@ -1,0 +1,17 @@
+<section class="section container">
+  <app-head [center]="true" label="Rider stories" title="Trusted by thousands" />
+  <div class="tst-grid">
+    @for (t of items; track t.name) {
+      <div class="tst glass">
+        <div class="tst-stars">
+          @for (i of stars(t.r); track i) { <app-icon n="star" [s]="15" [fill]="true" /> }
+        </div>
+        <p class="tst-text">{{ t.text }}</p>
+        <div class="tst-auth">
+          <span class="tst-av">{{ t.name[0] }}</span>
+          <div><div class="tst-name">{{ t.name }}</div><div class="tst-role">{{ t.role }} · {{ t.trips }} trips</div></div>
+        </div>
+      </div>
+    }
+  </div>
+</section>

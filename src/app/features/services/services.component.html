@@ -1,0 +1,16 @@
+<section class="section container" id="services">
+  <app-head label="What we do" title="One platform, every journey"
+    desc="From a quick airport pickup to a fully assembled week away — the right vehicle, the right stay, the right price." />
+  <div class="svc-grid">
+    @for (s of services; track s.title) {
+      <div class="svc glass">
+        <span class="svc-ic"><app-icon [n]="s.icon" [s]="22" /></span>
+        <h3 class="svc-t">{{ s.title }}</h3>
+        <p class="svc-d">{{ s.desc }}</p>
+        <div class="tags">
+          @for (f of s.feats; track f) { <span class="tag-soft">{{ f }}</span> }
+        </div>
+      </div>
+    }
+  </div>
+</section>

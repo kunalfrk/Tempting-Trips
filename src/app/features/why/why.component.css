@@ -1,0 +1,3 @@
+/* The `.trust` tile itself is a shared atom (styles/components/_atoms.css);
+   this section only owns its grid. */
+.trust-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}

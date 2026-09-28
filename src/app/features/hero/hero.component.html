@@ -1,0 +1,59 @@
+<header class="hero container">
+  <div class="hero-left">
+    <div class="eyebrow"><span class="eyebrow-dot"></span>Travel · Stay · Explore</div>
+    <h1 class="hero-h1">Every trip,<br /><span class="grad-text">effortlessly assembled.</span></h1>
+    <p class="hero-sub">Rides, airport transfers, and full tour packages — travel, hotels, and sightseeing chosen from curated options and priced in one place.</p>
+    <div class="hero-stats">
+      @for (s of stats; track s.l) {
+        <div class="hstat"><div class="hstat-n">{{ s.n }}</div><div class="hstat-l">{{ s.l }}</div></div>
+      }
+    </div>
+  </div>
+
+  <div class="widget glass-strong">
+    <div class="seg">
+      <button [class.act]="store.mode() === 'ride'" (click)="store.mode.set('ride')"><app-icon n="car" [s]="16" />Rides</button>
+      <button [class.act]="store.mode() === 'tour'" (click)="store.mode.set('tour')"><app-icon n="bag" [s]="16" />Tour packages</button>
+      <span class="seg-glow" [style.transform]="store.mode() === 'tour' ? 'translateX(100%)' : 'translateX(0)'"></span>
+    </div>
+
+    @if (store.mode() === 'ride') {
+      <div class="pills">
+        @for (t of tripTypes; track t.k) {
+          <button class="pill" [class.act]="store.tripType() === t.k" (click)="store.tripType.set(t.k)">{{ t.l }}</button>
+        }
+      </div>
+      <app-field icon="pin" label="Pickup" [value]="store.pickup()" (valueChange)="setPickup($event)" ph="Enter pickup location" [err]="pickupErr()" [opts]="cities" />
+      <button class="swap" (click)="swap()"><app-icon n="swap" [s]="16" /></button>
+      <app-field icon="pin" label="Destination" [value]="store.drop()" (valueChange)="setDrop($event)" ph="Where to?" [err]="dropErr()" [opts]="cities" />
+      <div class="two">
+        <app-field icon="calendar" label="Date" type="date" [value]="store.date()" (valueChange)="store.date.set($event)" />
+        <app-field icon="clock" label="Time" type="time" [value]="store.time()" (valueChange)="store.time.set($event)" />
+      </div>
+      <div class="two">
+        <div class="stepper-field">
+          <label class="f-label">Passengers</label>
+          <app-stepper [value]="store.pax()" (valueChange)="store.pax.set($event)" [min]="1" [max]="12" />
+        </div>
+        <div></div>
+      </div>
+      <button class="btn primary block" (click)="startRide()">Search rides<app-icon n="arrow" [s]="17" /></button>
+    } @else {
+      <label class="f-label">Destination</label>
+      <div class="dest-scroll">
+        @for (d of destinations.slice(0, 6); track d.name) {
+          <button class="dest-pill" [class.act]="store.tDest().name === d.name" (click)="store.tDest.set(d)">{{ d.name }}</button>
+        }
+      </div>
+      <div class="two" style="margin-top:12px">
+        <div class="stepper-field"><label class="f-label">Days</label><app-stepper [value]="store.tDays()" (valueChange)="store.tDays.set($event)" [min]="2" [max]="14" /></div>
+        <div class="stepper-field"><label class="f-label">Travellers</label><app-stepper [value]="store.tTrav()" (valueChange)="store.tTrav.set($event)" [min]="1" [max]="12" /></div>
+      </div>
+      <div class="widget-preview">
+        <span class="muted">Estimated from</span>
+        <span class="price">{{ money(store.pkg().total) }}</span>
+      </div>
+      <button class="btn primary block" (click)="store.scrollTo('builder')">Build package<app-icon n="arrow" [s]="17" /></button>
+    }
+  </div>
+</header>

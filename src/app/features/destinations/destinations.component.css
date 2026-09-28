@@ -1,0 +1,10 @@
+/* destinations */
+.dest-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+.dcard{overflow:hidden;transition:.3s;cursor:pointer}
+.dcard:hover{transform:translateY(-5px);border-color:rgba(94,234,212,.3)}
+.dcard-region{position:absolute;top:12px;left:12px;font-size:11px;font-weight:600;letter-spacing:.05em;padding:4px 11px;border-radius:50px;background:rgba(0,0,0,.4);backdrop-filter:blur(8px);color:#fff}
+.dcard-body{padding:18px}
+.dcard-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px}
+.dcard-name{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:18px}
+.dcard-desc{color:var(--ink-2);font-size:13px;line-height:1.6;margin-bottom:12px}
+.dcard-spots{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}

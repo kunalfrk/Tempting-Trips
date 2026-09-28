@@ -1,0 +1,5 @@
+/* toast */
+.toast{position:fixed;bottom:24px;right:24px;z-index:200;display:flex;align-items:center;gap:9px;padding:14px 20px;border-radius:50px;font-size:14px;font-weight:500;color:var(--acc);animation:up .3s}
+.toast svg{color:var(--acc)}
+.toast-dot{width:7px;height:7px;border-radius:50%;background:var(--acc);box-shadow:0 0 10px var(--acc)}
+@keyframes up{from{transform:translateY(16px);opacity:0}}

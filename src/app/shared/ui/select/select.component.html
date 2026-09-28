@@ -1,0 +1,17 @@
+<div class="sel-wrap">
+  <button type="button" class="sel-btn" [class.on]="open()" (click)="toggle()">
+    <span>{{ label }}</span>
+    <app-icon n="chevron" [s]="15" />
+  </button>
+
+  @if (open()) {
+    <ul class="sel-menu">
+      @for (o of opts; track o.k) {
+        <li [class.act]="o.k === value" (click)="pick(o)">
+          <span>{{ o.l }}</span>
+          @if (o.k === value) { <app-icon n="check" [s]="14" [sw]="2.4" /> }
+        </li>
+      }
+    </ul>
+  }
+</div>

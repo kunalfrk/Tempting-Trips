@@ -1,0 +1,5 @@
+.scene{position:relative;overflow:hidden}
+.scene-light{position:absolute;inset:0;background:radial-gradient(120% 90% at 75% 0%, rgba(255,255,255,0.35), transparent 55%)}
+.scene-sun{position:absolute;top:18px;right:22px;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,0.55);filter:blur(2px);box-shadow:0 0 30px 8px rgba(255,255,255,0.4)}
+.scene-sil{position:absolute;bottom:0;left:0;width:100%;height:55%}
+.scene-slot{position:absolute;inset:0}

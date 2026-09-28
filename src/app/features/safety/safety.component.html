@@ -1,0 +1,12 @@
+<section class="section container" id="safety">
+  <app-head [center]="true" label="Safety first" title="Your safety, non-negotiable"
+    desc="Layered protocols from the moment you book to the moment you arrive." />
+  <div class="safety-grid">
+    @for (s of items; track s.t) {
+      <div class="trust glass">
+        <span class="trust-ic"><app-icon [n]="s.icon" [s]="20" /></span>
+        <div><div class="trust-t">{{ s.t }}</div><div class="trust-d">{{ s.d }}</div></div>
+      </div>
+    }
+  </div>
+</section>

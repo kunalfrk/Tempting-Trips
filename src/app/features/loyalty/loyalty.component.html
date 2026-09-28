@@ -1,0 +1,19 @@
+<section class="section container">
+  <div class="loyal glass-strong">
+    <app-head [center]="true" label="Rewards" title="Every trip earns you more"
+      desc="Earn points on every booking. Unlock tiers for priority support, free upgrades, and exclusive rates." />
+    <div class="tiers">
+      @for (t of tiers; track t.name; let i = $index) {
+        <div class="tier glass" [class.featured]="i === 1">
+          @if (i === 1) { <span class="tier-flag">Most popular</span> }
+          <div class="tier-name">{{ t.name }}</div>
+          <div class="tier-pts mono">{{ t.pts }} points</div>
+          <div class="tier-perk">{{ t.perk }}</div>
+        </div>
+      }
+    </div>
+    <button class="btn primary" (click)="toast.show('Sign up to start earning')">
+      Start earning<app-icon n="arrow" [s]="17" />
+    </button>
+  </div>
+</section>

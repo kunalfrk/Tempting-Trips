@@ -1,0 +1,20 @@
+<div class="field">
+  @if (label) { <label class="f-label">{{ label }}</label> }
+  <div class="input-wrap" [class.has-ic]="icon">
+    @if (icon) { <span class="input-ic"><app-icon [n]="icon" [s]="16" /></span> }
+    <input class="input" [class.err]="err" [type]="type" [placeholder]="ph" [value]="value"
+           autocomplete="off"
+           (input)="onInput($any($event.target).value)" (focus)="onFocus()" (keydown)="onKeydown($event)" />
+  </div>
+  @if (err) { <div class="f-err">{{ err }}</div> }
+
+  @if (opts.length && open() && matches.length) {
+    <ul class="f-sugg">
+      @for (m of matches; track m; let i = $index) {
+        <li [class.act]="active() === i" (mousedown)="$event.preventDefault(); pick(m)">
+          <app-icon n="pin" [s]="14" />{{ m }}
+        </li>
+      }
+    </ul>
+  }
+</div>

@@ -1,0 +1,132 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   Responsive overrides — desktop-first. Loaded last so it can safely
+   override component styles without touching them.
+
+   Angular emulates view encapsulation by injecting each component's
+   <style> into <head> AFTER this global stylesheet's <link>, so on an
+   equal-specificity tie the component style wins the cascade. Every
+   selector here is prefixed with `html body` to outrank plain single-class
+   component rules without resorting to !important.
+
+   Breakpoints:
+     ≤1000px  large tablet / small laptop
+     ≤840px   tablet portrait
+     ≤640px   mobile
+     ≤380px   small mobile
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── large tablet / small laptop ─────────────────────────────────────── */
+@media (max-width:1000px){
+  html body .container{padding:0 20px}
+  html body .section{padding:90px 0}
+
+  /* hero */
+  html body .hero{grid-template-columns:1fr;gap:36px;min-height:auto;padding-top:120px}
+  html body .hero-sub{max-width:none}
+
+  /* tour builder */
+  html body .builder{grid-template-columns:1fr}
+  html body .builder-side{position:static}
+
+  /* grids */
+  html body .svc-grid,html body .dest-grid,html body .veh-grid,html body .blog-grid,
+  html body .tst-grid,html body .trust-grid,html body .safety-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  html body .stay-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  html body .quick{grid-template-columns:repeat(3,minmax(0,1fr))}
+
+  /* drive */
+  html body .drive{grid-template-columns:1fr;gap:30px;padding:34px}
+
+  /* footer */
+  html body .foot-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:28px}
+}
+
+/* ── tablet portrait ──────────────────────────────────────────────────── */
+@media (max-width:840px){
+  html body .nav-links,html body .nav-cta{display:none}
+  html body .burger{display:block}
+
+  html body .hero-h1{font-size:clamp(34px,7vw,52px)}
+  html body .hero-stats{gap:26px;flex-wrap:wrap}
+
+  html body .f-grid{grid-template-columns:1fr}
+  html body .opt-grid.two-col{grid-template-columns:1fr}
+  html body .pay-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+
+  html body .drive-benefits{grid-template-columns:repeat(2,minmax(0,1fr))}
+
+  html body .flow-head{flex-direction:column;align-items:flex-start}
+}
+
+/* ── mobile ───────────────────────────────────────────────────────────── */
+@media (max-width:640px){
+  html body .section{padding:64px 0}
+  html body .container{padding:0 18px}
+
+  /* nav */
+  html body .nav-links,html body .nav-cta{display:none}
+  html body .burger{display:block}
+
+  /* hero */
+  html body .hero{padding-top:104px;padding-bottom:50px}
+  html body .hero-h1{font-size:clamp(30px,9vw,42px)}
+  html body .hero-sub{font-size:15px}
+  html body .hero-stats{gap:20px}
+  html body .hstat-n{font-size:22px}
+  html body .widget{padding:16px}
+
+  /* grids collapse to single column */
+  html body .svc-grid,html body .dest-grid,html body .veh-grid,html body .blog-grid,
+  html body .tst-grid,html body .trust-grid,html body .safety-grid,
+  html body .stay-grid,html body .opt-grid.two-col,html body .f-grid,html body .pay-grid{grid-template-columns:minmax(0,1fr)}
+  html body .quick{grid-template-columns:repeat(2,minmax(0,1fr));margin-top:8px}
+  html body .foot-grid{grid-template-columns:1fr;gap:32px}
+  html body .drive-benefits{grid-template-columns:repeat(2,minmax(0,1fr))}
+  html body .drive{padding:22px}
+
+  /* loyalty tiers */
+  html body .tiers{flex-direction:column;align-items:stretch}
+  html body .tier{min-width:0}
+  html body .loyal,html body .cta{padding:40px 22px}
+
+  /* booking flow */
+  html body .flow{padding-top:100px}
+  html body .sd-l{display:none}
+  html body .stepdot{padding:9px 12px}
+  html body .confirm{padding:28px 20px}
+  html body .confirm-acts .btn{width:100%}
+  html body .confirm-acts{flex-direction:column}
+
+  /* footer */
+  html body .news{max-width:none}
+  html body .foot-bottom{flex-direction:column;align-items:flex-start;gap:10px}
+
+  /* mobile sticky CTA */
+  html body .mstick{display:flex}
+  html body{padding-bottom:70px}
+
+  /* auth modal */
+  html body .auth-modal{padding:28px 22px 22px}
+
+  /* headings */
+  html body .h2{font-size:clamp(24px,6vw,32px)}
+  html body .head{margin-bottom:32px}
+  html body .head-desc{font-size:14px}
+
+  /* nav drawer */
+  html body .drawer a{font-size:19px}
+}
+
+/* ── small mobile ─────────────────────────────────────────────────────── */
+@media (max-width:380px){
+  html body .container{padding:0 14px}
+  html body .hero-stats{gap:16px}
+  html body .quick{grid-template-columns:repeat(2,1fr);gap:9px}
+  html body .tags,html body .dcard-spots{gap:5px}
+  html body .cta-btns{flex-direction:column;align-items:stretch}
+  html body .stepbar{gap:6px}
+}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+}

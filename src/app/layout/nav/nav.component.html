@@ -1,0 +1,27 @@
+<nav [class.on]="scrolled()">
+  <div class="nav-in">
+    <button class="brand" (click)="store.goHome()">
+      <span class="brand-mark"><app-icon n="route" [s]="18" [sw]="1.8" /></span>
+      Tempting&nbsp;<span class="brand-2">Trips</span>
+    </button>
+    <div class="nav-links">
+      @for (l of links; track l.id) { <a (click)="store.scrollTo(l.id)">{{ l.label }}</a> }
+    </div>
+    <div class="nav-cta">
+      <button class="btn primary sm" (click)="auth.show()">Sign in</button>
+      <!-- <button class="btn primary sm" (click)="toast.show('Get the app on iOS & Android')">Get the app</button> -->
+    </div>
+    <button class="burger" (click)="menu.set(true)"><app-icon n="menu" [s]="22" /></button>
+  </div>
+</nav>
+
+@if (menu()) {
+  <div class="drawer">
+    <button class="drawer-x" (click)="menu.set(false)"><app-icon n="close" [s]="24" /></button>
+    @for (l of links; track l.id) { <a (click)="go(l.id)">{{ l.label }}</a> }
+    <div class="drawer-cta">
+      <button class="btn ghost" (click)="menu.set(false); auth.show()">Sign in</button>
+      <button class="btn primary" (click)="menu.set(false); toast.show('Get the app')">Get the app</button>
+    </div>
+  </div>
+}

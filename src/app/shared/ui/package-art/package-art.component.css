@@ -1,0 +1,5 @@
+.part{position:relative;overflow:hidden}
+.part-glow{position:absolute;inset:0;background:radial-gradient(120% 90% at 75% 0%, rgba(255,255,255,0.35), transparent 58%)}
+.part-sun{position:absolute;top:20px;right:26px;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,0.6);filter:blur(2px);box-shadow:0 0 34px 10px rgba(255,255,255,0.42)}
+.part-svg{position:absolute;inset:0;width:100%;height:100%}
+.part-motif{position:absolute;right:18px;bottom:26px;width:88px;height:58px}

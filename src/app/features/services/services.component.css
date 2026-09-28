@@ -1,0 +1,8 @@
+/* services */
+.svc-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.svc{padding:28px;transition:.3s}
+.svc:hover{transform:translateY(-4px);border-color:rgba(94,234,212,.25);background:var(--glass-2)}
+.svc-ic{width:46px;height:46px;border-radius:13px;display:grid;place-items:center;background:rgba(94,234,212,.1);color:var(--acc);margin-bottom:16px}
+.svc-t{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:19px;margin-bottom:8px;letter-spacing:-.01em}
+.svc-d{color:var(--ink-2);font-size:14px;line-height:1.65;margin-bottom:16px}
+.tags{display:flex;flex-wrap:wrap;gap:7px}

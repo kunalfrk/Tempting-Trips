@@ -1,0 +1,3 @@
+/* Safety reuses the shared `.trust` tile styling from the Why section and
+   only owns its own grid, so the two sections stay independently editable. */
+.safety-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}

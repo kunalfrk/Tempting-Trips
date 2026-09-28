@@ -1,0 +1,21 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   Tempting Trips — global stylesheet.
+
+   Only genuinely app-wide styles live here. Everything that belongs to a
+   single component now sits beside it as <component>.component.css.
+
+   Keep the import order: _responsive.css intentionally overrides earlier
+   rules and must stay last.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── base ───────────────────────────────────────────────────────────────── */
+@import './styles/base/_fonts.css';
+@import './styles/base/_variables-reset.css';
+@import './styles/base/_typography.css';
+
+/* ── shared atoms used across many components ───────────────────────────── */
+@import './styles/components/_buttons.css';
+@import './styles/components/_atoms.css';
+
+/* ── responsive overrides (must stay last) ──────────────────────────────── */
+@import './styles/base/_responsive.css';

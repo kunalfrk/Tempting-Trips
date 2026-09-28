@@ -1,0 +1,5 @@
+<div class="stepper">
+  <button (click)="dec()" [disabled]="value <= min"><app-icon n="minus" [s]="15" [sw]="2" /></button>
+  <span class="stepper-v">{{ value }}</span>
+  <button (click)="inc()" [disabled]="value >= max"><app-icon n="plus" [s]="15" [sw]="2" /></button>
+</div>

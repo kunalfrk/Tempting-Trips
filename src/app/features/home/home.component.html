@@ -1,0 +1,41 @@
+<app-hero />
+
+<!-- quick categories -->
+<section class="container quick">
+  @for (c of quickCats; track c.l) {
+    <button class="qcat glass" (click)="store.scrollTo(c.target)">
+      <span class="qcat-ic"><app-icon [n]="c.ic" [s]="19" /></span>{{ c.l }}
+    </button>
+  }
+</section>
+
+<app-services />
+<app-tour-builder />
+<app-destinations />
+<app-why />
+<app-testimonials />
+<app-safety />
+<app-drive />
+<app-loyalty />
+<app-blog />
+<app-faq />
+
+<!-- CTA -->
+<section class="section container">
+  <div class="cta glass-strong">
+    <h2 class="cta-h">Ready when you are.</h2>
+    <p class="muted">Book a ride or build a package in under a minute.</p>
+    <div class="cta-btns">
+      <button class="btn primary" (click)="scrollTop()">Book now<app-icon n="arrow" [s]="17" /></button>
+      <button class="btn ghost" (click)="store.scrollTo('builder')">Build a package</button>
+    </div>
+  </div>
+</section>
+
+<app-footer />
+
+<!-- mobile sticky -->
+<div class="mstick">
+  <button class="btn ghost sm" (click)="store.scrollTo('builder')"><app-icon n="bag" [s]="16" />Package</button>
+  <button class="btn primary sm" (click)="scrollTop()"><app-icon n="car" [s]="16" />Book a ride</button>
+</div>

@@ -1,0 +1,4 @@
+.vart{position:relative;overflow:hidden}
+.vart-light{position:absolute;inset:0;background:radial-gradient(120% 90% at 75% 0%, rgba(255,255,255,0.35), transparent 55%)}
+.vart-sun{position:absolute;top:16px;right:20px;width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,0.55);filter:blur(2px);box-shadow:0 0 26px 7px rgba(255,255,255,0.4)}
+.vart-svg{position:absolute;inset:0;width:100%;height:100%}

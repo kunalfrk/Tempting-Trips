@@ -1,0 +1,13 @@
+.tag-soft{font-size:11.5px;padding:5px 11px;border-radius:50px;background:rgba(255,255,255,.05);border:1px solid var(--brd);color:var(--ink-2)}
+.chip{font-size:11px;padding:4px 10px;border-radius:50px;background:rgba(94,234,212,.12);color:var(--acc);font-weight:600}
+/* mobile sticky */
+.mstick{display:none;position:fixed;bottom:0;left:0;right:0;z-index:90;gap:10px;padding:12px 16px calc(12px + env(safe-area-inset-bottom));background:rgba(8,11,20,.9);backdrop-filter:var(--blur);border-top:1px solid var(--brd)}
+.mstick .btn{flex:1}
+
+
+/* Trust tile — shared by the Why and Safety sections. */
+.trust{display:flex;gap:14px;align-items:flex-start;padding:22px;transition:.3s}
+.trust:hover{background:var(--glass-2)}
+.trust-ic{width:42px;height:42px;flex-shrink:0;border-radius:12px;display:grid;place-items:center;background:rgba(94,234,212,.1);color:var(--acc)}
+.trust-t{font-weight:600;font-size:15px;margin-bottom:3px}
+.trust-d{color:var(--ink-2);font-size:13px;line-height:1.5}

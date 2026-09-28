@@ -1,0 +1,131 @@
+<div class="flow container">
+  <div class="stepbar">
+    @for (s of steps; track s; let i = $index) {
+      <div class="stepdot" [class.act]="store.step() === i + 1" [class.done]="store.step() > i + 1">
+        <span class="sd-n">
+          @if (store.step() > i + 1) { <app-icon n="check" [s]="13" [sw]="2.4" /> } @else { {{ i + 1 }} }
+        </span>
+        <span class="sd-l">{{ s }}</span>
+      </div>
+    }
+  </div>
+
+  <!-- Step 2: vehicle -->
+  @if (store.step() === 2) {
+    @if (store.selectedPkg(); as p) {
+      <div class="glass pad pkg-banner">
+        <div>
+          <div class="chip">{{ p.category }}</div>
+          <div class="pkg-banner-title">{{ p.title }} · {{ p.days }}D/{{ p.nights }}N</div>
+        </div>
+        <div class="price">{{ money(p.price) }}</div>
+      </div>
+    }
+    <div class="flow-head">
+      <div>
+        <h2 class="h2">Choose your ride</h2>
+        <p class="muted">{{ store.pickup() }} → {{ store.drop() }} · {{ store.date() || 'Today' }} · {{ store.pax() }} pax</p>
+      </div>
+      <app-select [opts]="sortOpts" [value]="store.sort()" (valueChange)="store.sort.set($any($event))" />
+    </div>
+    <div class="veh-grid">
+      @for (v of store.vehicles(); track v.id) {
+        <div class="veh glass" [class.sel]="store.veh()?.id === v.id" (click)="store.veh.set(v)">
+          <app-vehicle-art [grad]="sceneGrad[v.scene]" [kind]="v.scene" [h]="120" />
+          <div class="veh-body">
+            <div class="veh-top"><div class="veh-name">{{ v.name }}</div><span class="chip">{{ v.cat }}</span></div>
+            <div class="veh-specs">
+              <span><app-icon n="users" [s]="15" />{{ v.pax }}</span>
+              <span><app-icon n="bag" [s]="15" />{{ v.bags }}</span>
+              <span><app-icon n="clock" [s]="15" />{{ v.time }}</span>
+            </div>
+            <div class="veh-foot">
+              <div><div class="price">{{ money(v.fare) }}</div><div class="micro">all inclusive</div></div>
+              <button class="btn sm" [class.primary]="store.veh()?.id === v.id" [class.ghost]="store.veh()?.id !== v.id"
+                (click)="selectVeh($event, v)">{{ store.veh()?.id === v.id ? 'Selected' : 'Select' }}</button>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+    <div class="flow-nav">
+      <button class="btn ghost" (click)="backFromVehicles()"><app-icon n="arrow" [s]="16" [style.transform]="'rotate(180deg)'" />Back</button>
+      @if (store.veh()) { <button class="btn primary" (click)="go(3)">Continue<app-icon n="arrow" [s]="16" /></button> }
+    </div>
+  }
+
+  <!-- Step 3: details -->
+  @if (store.step() === 3) {
+    <div class="narrow">
+      <h2 class="h2">Trip details</h2>
+      <p class="muted mb">{{ store.veh()?.name }} · {{ store.pickup() }} → {{ store.drop() }}</p>
+      <div class="glass pad">
+        <div class="f-grid">
+          <app-field label="Full name" [value]="store.form().name" (valueChange)="store.patchForm({ name: $event })" ph="Your name" />
+          <app-field label="Mobile" [value]="store.form().phone" (valueChange)="store.patchForm({ phone: $event })" ph="+91 98765 43210" />
+          <app-field label="Email" [value]="store.form().email" (valueChange)="store.patchForm({ email: $event })" ph="you@email.com" />
+          <app-field label="Coupon" [value]="store.form().coupon" (valueChange)="store.patchForm({ coupon: $event })" ph="WELCOME20" />
+        </div>
+        <label class="f-label" style="margin-top:16px">Special instructions</label>
+        <textarea class="input" rows="3" placeholder="Child seat, extra luggage, accessibility…"
+          [value]="store.form().notes" (input)="store.patchForm({ notes: $any($event.target).value })"></textarea>
+      </div>
+      <div class="flow-nav">
+        <button class="btn ghost" (click)="go(2)"><app-icon n="arrow" [s]="16" [style.transform]="'rotate(180deg)'" />Back</button>
+        <button class="btn primary" (click)="toPayment()">To payment<app-icon n="arrow" [s]="16" /></button>
+      </div>
+    </div>
+  }
+
+  <!-- Step 4: payment -->
+  @if (store.step() === 4 && store.veh(); as veh) {
+    <div class="narrow">
+      <h2 class="h2">Payment</h2>
+      <p class="muted mb">Review the fare and pay securely</p>
+      <div class="glass pad ledger">
+        <div class="row"><span class="muted">Base fare</span><span class="mono">{{ money(round(veh.fare * 0.66)) }}</span></div>
+        <div class="row"><span class="muted">Distance charge</span><span class="mono">{{ money(round(veh.fare * 0.18)) }}</span></div>
+        <div class="row"><span class="muted">Driver allowance</span><span class="mono">{{ money(250) }}</span></div>
+        <div class="row"><span class="muted">GST (5%)</span><span class="mono">{{ money(round(veh.fare * 0.05)) }}</span></div>
+        <div class="row"><span class="muted">Toll (est.)</span><span class="mono">{{ money(round(veh.fare * 0.04)) }}</span></div>
+        @if (store.form().coupon) {
+          <div class="row"><span class="muted">Discount</span><span class="mono good">-{{ money(round(veh.fare * 0.08)) }}</span></div>
+        }
+        <div class="ledger-total"><span>Total payable</span><span class="price big">{{ money(total(veh)) }}</span></div>
+      </div>
+      <div class="pay-grid">
+        @for (p of payMethods; track p.k) {
+          <button class="pay" [class.act]="store.pay() === p.k" (click)="store.pay.set(p.k)">{{ p.l }}</button>
+        }
+      </div>
+      <div class="flow-nav">
+        <button class="btn ghost" (click)="go(3)"><app-icon n="arrow" [s]="16" [style.transform]="'rotate(180deg)'" />Back</button>
+        <button class="btn primary" (click)="pay()">Pay &amp; confirm<app-icon n="arrow" [s]="16" /></button>
+      </div>
+    </div>
+  }
+
+  <!-- Step 5: confirmation -->
+  @if (store.step() === 5 && store.veh(); as veh) {
+    <div class="confirm glass-strong">
+      <div class="confirm-check"><app-icon n="check" [s]="30" [sw]="2.4" /></div>
+      <h2 class="h2">You're all set</h2>
+      <div class="confirm-id">{{ bookingId }}</div>
+      <div class="confirm-box">
+        <div class="row"><span class="muted">Vehicle</span><span>{{ veh.name }} · {{ veh.cat }}</span></div>
+        <div class="row"><span class="muted">Route</span><span>{{ store.pickup() }} → {{ store.drop() }}</span></div>
+        <div class="row"><span class="muted">When</span><span>{{ store.date() || 'Today' }} · {{ store.time() || 'ASAP' }}</span></div>
+        <div class="row"><span class="muted">Driver</span><span>Rajesh Kumar · ★ 4.9</span></div>
+        <div class="row"><span class="muted">Payment</span><span class="good">Paid · {{ store.pay().toUpperCase() }}</span></div>
+      </div>
+      <div class="confirm-acts">
+        <button class="btn primary sm" (click)="toast.show('Driver: +91 99876 54321')"><app-icon n="phone" [s]="15" />Contact driver</button>
+        <button class="btn ghost sm" (click)="toast.show('Invoice downloaded')">Download invoice</button>
+        <button class="btn ghost sm" (click)="toast.show('Added to calendar')">Add to calendar</button>
+      </div>
+      <button class="btn link" (click)="store.goHome()">Book another ride</button>
+    </div>
+  }
+
+  <div style="height:100px"></div>
+</div>

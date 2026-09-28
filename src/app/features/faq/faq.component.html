@@ -1,0 +1,14 @@
+<section class="section container">
+  <app-head [center]="true" label="Help center" title="Questions, answered" />
+  <div class="faq-list">
+    @for (f of faqs; track f.q; let i = $index) {
+      <div class="faq glass" [class.open]="openIndex === i">
+        <button class="faq-q" (click)="toggle(i)">
+          <span>{{ f.q }}</span>
+          <span class="faq-chev" [class.up]="openIndex === i"><app-icon n="chevron" [s]="18" /></span>
+        </button>
+        <div class="faq-a" [style.maxHeight.px]="openIndex === i ? 200 : 0"><p>{{ f.a }}</p></div>
+      </div>
+    }
+  </div>
+</section>

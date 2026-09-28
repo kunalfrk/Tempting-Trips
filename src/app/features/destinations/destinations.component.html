@@ -1,0 +1,24 @@
+<section class="section container" id="destinations">
+  <app-head label="Destinations" title="Where will you go next?"
+    desc="Curated routes, verified drivers, and all-inclusive packages for India's most-loved places." />
+  <div class="dest-grid">
+    @for (d of destinations; track d.name) {
+      <div class="dcard glass" (click)="pick(d)">
+        <app-scene [grad]="d.grad" [line]="d.line">
+          <span class="dcard-region">{{ d.region }}</span>
+        </app-scene>
+        <div class="dcard-body">
+          <div class="dcard-top">
+            <h3 class="dcard-name">{{ d.name }}</h3>
+            <span class="price sm">{{ money(d.price) }}</span>
+          </div>
+          <p class="dcard-desc">{{ d.desc }}</p>
+          <div class="dcard-spots">
+            @for (s of d.spots; track s) { <span class="tag-soft">{{ s }}</span> }
+          </div>
+          <button class="btn link">Build a package<app-icon n="arrow" [s]="15" /></button>
+        </div>
+      </div>
+    }
+  </div>
+</section>

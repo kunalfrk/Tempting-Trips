@@ -1,0 +1,11 @@
+<section class="section container">
+  <app-head [center]="true" label="Why Tempting Trips" title="Built for people who value their time" />
+  <div class="trust-grid">
+    @for (t of items; track t.t) {
+      <div class="trust glass">
+        <span class="trust-ic"><app-icon [n]="t.icon" [s]="20" /></span>
+        <div><div class="trust-t">{{ t.t }}</div><div class="trust-d">{{ t.d }}</div></div>
+      </div>
+    }
+  </div>
+</section>

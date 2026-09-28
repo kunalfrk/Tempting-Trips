@@ -1,0 +1,40 @@
+@if (auth.open()) {
+  <div class="auth-scrim" (click)="close()">
+    <div class="auth-modal glass" (click)="$event.stopPropagation()">
+      <button class="auth-x" (click)="close()"><app-icon n="close" [s]="20" /></button>
+
+      <div class="auth-mark"><app-icon n="route" [s]="20" [sw]="1.8" /></div>
+      <h3 class="auth-title">Welcome back</h3>
+      <p class="auth-sub">Sign in to manage your trips and bookings.</p>
+
+      <div class="auth-tabs">
+        <button class="auth-tab" [class.on]="mode() === 'email'" (click)="setMode('email')">
+          <app-icon n="mail" [s]="15" /> Email
+        </button>
+        <button class="auth-tab" [class.on]="mode() === 'phone'" (click)="setMode('phone')">
+          <app-icon n="phone" [s]="15" /> Number
+        </button>
+      </div>
+
+      @if (mode() === 'email') {
+        <app-field label="Email address" ph="you@example.com" type="email" icon="mail"
+                    [value]="email()" (valueChange)="email.set($event)" />
+      } @else {
+        <app-field label="Phone number" ph="+1 555 000 1234" type="tel" icon="phone"
+                    [value]="phone()" (valueChange)="phone.set($event)" />
+      }
+
+      <button class="btn primary block" (click)="submit()">
+        Continue with {{ mode() === 'email' ? 'email' : 'number' }}
+      </button>
+
+      <div class="auth-divider"><span>or</span></div>
+
+      <button class="btn ghost block" (click)="setMode(mode() === 'email' ? 'phone' : 'email')">
+        Continue with {{ mode() === 'email' ? 'phone number' : 'email' }} instead
+      </button>
+
+      <p class="auth-legal">By continuing, you agree to our Terms &amp; Privacy Policy.</p>
+    </div>
+  </div>
+}

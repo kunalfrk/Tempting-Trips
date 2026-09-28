@@ -1,0 +1,11 @@
+/* loyalty */
+.loyal{padding:52px 40px;text-align:center}
+.loyal .head{margin-bottom:36px}
+.tiers{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:34px}
+.tier{position:relative;padding:26px 30px;min-width:210px;text-align:center;transition:.3s}
+.tier:hover{transform:translateY(-4px)}
+.tier.featured{border-color:rgba(94,234,212,.4);background:rgba(94,234,212,.06)}
+.tier-flag{position:absolute;top:-11px;left:50%;transform:translateX(-50%);font-size:11px;font-weight:600;padding:4px 12px;border-radius:50px;background:linear-gradient(100deg,var(--acc),var(--acc-2));color:#04121a}
+.tier-name{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:20px;color:var(--acc);margin-bottom:6px}
+.tier-pts{font-size:12px;color:var(--ink-2);margin-bottom:10px}
+.tier-perk{font-size:13px;color:var(--ink)}

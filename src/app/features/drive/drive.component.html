@@ -1,0 +1,19 @@
+<section class="section container" id="drive">
+  <div class="drive glass-strong">
+    <div class="drive-left">
+      <app-head label="Partner with us" title="Drive with Tempting Trips"
+        desc="Join 15,000+ professional drivers across 120 cities. Flexible hours, weekly payouts, and a path from economy to luxury tiers." />
+      <button class="btn primary" (click)="toast.show('Driver registration opening soon')">
+        Join the network<app-icon n="arrow" [s]="17" />
+      </button>
+    </div>
+    <div class="drive-benefits">
+      @for (b of benefits; track b.t) {
+        <div class="db glass">
+          <span class="db-ic"><app-icon [n]="b.icon" [s]="18" /></span>
+          <div class="db-t">{{ b.t }}</div><div class="db-d">{{ b.d }}</div>
+        </div>
+      }
+    </div>
+  </div>
+</section>

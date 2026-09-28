@@ -1,0 +1,45 @@
+/* builder */
+.builder{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:22px;align-items:start}
+.builder-main{display:flex;flex-direction:column;gap:16px}
+.build-block{padding:22px}
+.bb-head{display:flex;align-items:center;gap:10px;font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:15px;margin-bottom:16px}
+.bb-ic{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;background:rgba(94,234,212,.12);color:var(--acc)}
+.bb-hint{margin-left:auto;font-family:'Inter';font-size:12px;font-weight:400;color:var(--ink-2)}
+.opt-grid{display:flex;flex-direction:column;gap:9px}
+.opt-grid.two-col{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.opt{position:relative;display:flex;align-items:center;gap:13px;padding:14px;border-radius:var(--r-sm);border:1px solid var(--brd);background:rgba(0,0,0,.15);text-align:left;transition:.22s}
+.opt:hover{border-color:var(--brd-2);background:rgba(255,255,255,.04)}
+.opt.sel{border-color:rgba(94,234,212,.5);background:rgba(94,234,212,.08)}
+.opt-ic{width:38px;height:38px;flex-shrink:0;border-radius:10px;display:grid;place-items:center;background:rgba(255,255,255,.06);color:var(--acc)}
+.opt.sel .opt-ic{background:rgba(94,234,212,.16)}
+.opt-body{flex:1;min-width:0}
+.opt-name{font-weight:600;font-size:14px}
+.opt-sub{font-size:12px;color:var(--ink-2);margin-top:2px}
+.opt-price{font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:500;color:var(--ink);text-align:right}
+.opt-price span{display:block;font-family:'Inter';font-size:10px;color:var(--ink-3);font-weight:400}
+.opt-check{position:absolute;top:-7px;right:-7px;width:18px;height:18px;border-radius:50%;background:var(--acc);color:#04121a;display:grid;place-items:center;box-shadow:0 2px 6px rgba(0,0,0,.35);border:2px solid var(--bg)}
+.opt-box{width:20px;height:20px;border-radius:6px;border:1.5px solid var(--brd-2);display:grid;place-items:center;flex-shrink:0;color:#04121a;transition:.2s}
+.opt-box.on{background:var(--acc);border-color:var(--acc)}
+.stay-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.stay{position:relative;padding:16px;padding-top:22px;border-radius:var(--r-sm);border:1px solid var(--brd);background:rgba(0,0,0,.15);text-align:left;transition:.22s}
+.stay:hover{border-color:var(--brd-2)}
+.stay.sel{border-color:rgba(94,234,212,.5);background:rgba(94,234,212,.08)}
+.stay-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.stay-tier{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--acc)}
+.stay-rate{display:inline-flex;align-items:center;gap:3px;font-size:12px;color:var(--ink-2)}
+.stay-rate svg{color:var(--acc)}
+.stay-check{position:absolute;top:-8px;right:-8px;width:20px;height:20px;border-radius:50%;background:var(--acc);color:#04121a;display:grid;place-items:center;box-shadow:0 2px 6px rgba(0,0,0,.35);border:2px solid var(--bg)}
+.stay-name{font-weight:600;font-size:14px;margin-bottom:5px}
+.stay-amen{font-size:11.5px;color:var(--ink-2);margin-bottom:12px;line-height:1.4}
+.stay-price{font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:500;color:var(--ink)}
+.stay-price span{font-family:'Inter';font-size:10px;color:var(--ink-2);font-weight:400}
+.builder-side{position:sticky;top:90px}
+.ledger-card{padding:0;overflow:hidden}
+.ledger-dest{position:absolute;bottom:12px;left:14px;display:inline-flex;align-items:center;gap:5px;font-family:'Space Grotesk';font-weight:600;font-size:17px;color:#fff;text-shadow:0 1px 8px rgba(0,0,0,.4)}
+.ledger-body{padding:20px}
+.ledger-line{display:flex;justify-content:space-between;align-items:center;padding:8px 0;font-size:13px}
+.ledger-line .mono{font-size:13px}
+.ledger-sum{display:flex;justify-content:space-between;align-items:baseline;margin-top:8px;padding-top:14px;border-top:1px solid var(--brd);font-weight:600;font-size:15px}
+.ledger-per{font-size:12px;margin:6px 0 16px;text-align:right}
+.ledger-note{display:flex;align-items:center;gap:7px;justify-content:center;margin-top:12px;font-size:12px;color:var(--ink-2)}
+.ledger-note svg{color:var(--acc)}

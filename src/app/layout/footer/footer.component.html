@@ -1,0 +1,29 @@
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="brand" style="margin-bottom:14px">
+          <span class="brand-mark"><app-icon n="route" [s]="18" [sw]="1.8" /></span>Tempting&nbsp;<span class="brand-2">Trips</span>
+        </div>
+        <p class="muted">Premium travel and mobility for people who value their time. Rides, transfers, and tour packages across 120+ cities.</p>
+        <div class="news">
+          <input class="input" placeholder="Email for travel updates" />
+          <button class="btn primary sm" (click)="toast.show('Subscribed')">Subscribe</button>
+        </div>
+      </div>
+      @for (col of columns; track col.h) {
+        <div>
+          <div class="foot-h">{{ col.h }}</div>
+          @for (l of col.links; track l) { <a class="foot-a" (click)="toast.show(l + ' coming soon')">{{ l }}</a> }
+        </div>
+      }
+    </div>
+    <div class="foot-bottom">
+      <span class="muted">© 2026 Tempting Trips Pvt. Ltd.</span>
+      <div class="foot-badges">
+        <span class="badge"><app-icon n="shield" [s]="13" />PCI-DSS</span>
+        <span class="badge"><app-icon n="star" [s]="13" />4.8 on stores</span>
+      </div>
+    </div>
+  </div>
+</footer>

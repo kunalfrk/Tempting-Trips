@@ -1,0 +1,10 @@
+<div class="scene" [style.height.px]="h" [style.background]="bg">
+  <div class="scene-light"></div>
+  <div class="scene-sun"></div>
+  @if (line) {
+    <svg viewBox="0 0 280 120" preserveAspectRatio="none" class="scene-sil">
+      <path [attr.d]="silPath" fill="rgba(255,255,255,0.22)" />
+    </svg>
+  }
+  <div class="scene-slot"><ng-content></ng-content></div>
+</div>

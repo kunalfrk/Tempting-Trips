@@ -1,0 +1,27 @@
+<div class="vart" [style.height.px]="h" [style.background]="bg">
+  <div class="vart-light"></div>
+  <div class="vart-sun"></div>
+
+  <svg viewBox="0 0 280 120" preserveAspectRatio="xMidYMax meet" class="vart-svg">
+    <!-- road -->
+    <line x1="0" y1="96.5" x2="280" y2="96.5" stroke="rgba(255,255,255,0.35)" stroke-width="1.5" />
+    <line x1="18" y1="103" x2="60" y2="103" stroke="rgba(255,255,255,0.18)" stroke-width="3" stroke-linecap="round" />
+    <line x1="112" y1="103" x2="168" y2="103" stroke="rgba(255,255,255,0.18)" stroke-width="3" stroke-linecap="round" />
+    <line x1="220" y1="103" x2="262" y2="103" stroke="rgba(255,255,255,0.18)" stroke-width="3" stroke-linecap="round" />
+
+    <!-- body -->
+    <path [attr.d]="body" fill="rgba(255,255,255,0.30)" stroke="rgba(255,255,255,0.55)" stroke-width="1.6"
+          stroke-linejoin="round" />
+    <!-- windows -->
+    <path [attr.d]="glass" fill="rgba(8,11,20,0.28)" />
+
+    <!-- wheels -->
+    @for (w of wheels; track w.x) {
+      <g>
+        <circle [attr.cx]="w.x" [attr.cy]="96 - w.r * 0.12" [attr.r]="w.r" fill="rgba(8,11,20,0.55)"
+                stroke="rgba(255,255,255,0.6)" stroke-width="1.8" />
+        <circle [attr.cx]="w.x" [attr.cy]="96 - w.r * 0.12" [attr.r]="w.r * 0.4" fill="rgba(255,255,255,0.5)" />
+      </g>
+    }
+  </svg>
+</div>

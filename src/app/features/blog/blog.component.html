@@ -1,0 +1,15 @@
+<section class="section container" id="blog">
+  <app-head label="Travel guide" title="Stories, tips & inspiration" />
+  <div class="blog-grid">
+    @for (b of posts; track b.title) {
+      <div class="bcard glass" (click)="toast.show('Reading: ' + b.title)">
+        <app-scene [grad]="[b.grad[0], b.grad[1], b.grad[1]]" line="wave" [h]="150" />
+        <div class="bcard-body">
+          <div class="bcard-cat">{{ b.cat }}</div>
+          <h3 class="bcard-t">{{ b.title }}</h3>
+          <div class="bcard-meta">{{ b.author }} · {{ b.time }} read</div>
+        </div>
+      </div>
+    }
+  </div>
+</section>

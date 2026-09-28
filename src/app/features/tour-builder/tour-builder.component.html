@@ -1,0 +1,91 @@
+<section class="section container" id="builder">
+  <app-head label="Tour Builder" title="Assemble your trip, piece by piece"
+    desc="Pick your destination, then choose how you travel, where you stay, and what you'll see. The price updates as you go." />
+
+  <div class="builder">
+    <div class="builder-main">
+      <!-- destination + dates -->
+      <div class="glass pad build-block">
+        <div class="bb-head"><span class="bb-ic"><app-icon n="pin" [s]="16" /></span>Destination &amp; dates</div>
+        <div class="dest-scroll wrap">
+          @for (d of destinations; track d.name) {
+            <button class="dest-pill" [class.act]="store.tDest().name === d.name" (click)="store.tDest.set(d)">{{ d.name }}</button>
+          }
+        </div>
+        <div class="two" style="margin-top:14px">
+          <div class="stepper-field"><label class="f-label">Days</label><app-stepper [value]="store.tDays()" (valueChange)="store.tDays.set($event)" [min]="2" [max]="14" /></div>
+          <div class="stepper-field"><label class="f-label">Travellers</label><app-stepper [value]="store.tTrav()" (valueChange)="store.tTrav.set($event)" [min]="1" [max]="12" /></div>
+        </div>
+      </div>
+
+      <!-- travel -->
+      <div class="glass pad build-block">
+        <div class="bb-head"><span class="bb-ic"><app-icon n="car" [s]="16" /></span>How you travel<span class="bb-hint">choose one</span></div>
+        <div class="opt-grid">
+          @for (o of travelOpts; track o.id) {
+            <button class="opt" [class.sel]="store.tTravel() === o.id" (click)="store.tTravel.set(o.id)">
+              <span class="opt-ic"><app-icon [n]="o.icon" [s]="20" /></span>
+              <div class="opt-body"><div class="opt-name">{{ o.name }}</div><div class="opt-sub">{{ o.sub }} · {{ o.note }}</div></div>
+              <div class="opt-price">{{ money(o.price) }}<span>/person</span></div>
+              @if (store.tTravel() === o.id) { <span class="opt-check"><app-icon n="check" [s]="13" [sw]="2.6" /></span> }
+            </button>
+          }
+        </div>
+      </div>
+
+      <!-- stay -->
+      <div class="glass pad build-block">
+        <div class="bb-head"><span class="bb-ic"><app-icon n="bed" [s]="16" /></span>Where you stay
+          <span class="bb-hint">{{ store.pkg().nights }} nights · {{ store.pkg().rooms }} room{{ store.pkg().rooms > 1 ? 's' : '' }}</span></div>
+        <div class="stay-grid">
+          @for (o of stayOpts; track o.id) {
+            <button class="stay" [class.sel]="store.tStay() === o.id" (click)="store.tStay.set(o.id)">
+              <div class="stay-top"><span class="stay-tier">{{ o.tier }}</span>
+                <span class="stay-rate"><app-icon n="star" [s]="12" [fill]="true" />{{ o.rating }}</span></div>
+              <div class="stay-name">{{ o.name }}</div>
+              <div class="stay-amen">{{ o.amen.join(' · ') }}</div>
+              <div class="stay-price">{{ money(o.price) }}<span>/night</span></div>
+              @if (store.tStay() === o.id) { <span class="stay-check"><app-icon n="check" [s]="13" [sw]="2.6" /></span> }
+            </button>
+          }
+        </div>
+      </div>
+
+      <!-- sightseeing -->
+      <div class="glass pad build-block">
+        <div class="bb-head"><span class="bb-ic"><app-icon n="camera" [s]="16" /></span>What you'll see<span class="bb-hint">choose any</span></div>
+        <div class="opt-grid two-col">
+          @for (o of sightOpts; track o.id) {
+            <button class="opt" [class.sel]="store.tSights().includes(o.id)" (click)="store.toggleSight(o.id)">
+              <span class="opt-ic"><app-icon [n]="o.icon" [s]="20" /></span>
+              <div class="opt-body"><div class="opt-name">{{ o.name }}</div><div class="opt-sub">{{ o.dur }}</div></div>
+              <div class="opt-price">{{ money(o.price) }}</div>
+              <span class="opt-box" [class.on]="store.tSights().includes(o.id)">
+                @if (store.tSights().includes(o.id)) { <app-icon n="check" [s]="12" [sw]="2.8" /> }
+              </span>
+            </button>
+          }
+        </div>
+      </div>
+    </div>
+
+    <!-- sticky ledger -->
+    <aside class="builder-side">
+      <div class="glass-strong pad ledger-card">
+        <app-scene [grad]="store.tDest().grad" [line]="store.tDest().line" [h]="110">
+          <div class="ledger-dest"><app-icon n="pin" [s]="14" />{{ store.tDest().name }}</div>
+        </app-scene>
+        <div class="ledger-body">
+          <div class="ledger-line"><span class="muted">{{ store.pkg().travel.name }} × {{ store.tTrav() }}</span><span class="mono">{{ money(store.pkg().travelC) }}</span></div>
+          <div class="ledger-line"><span class="muted">{{ store.pkg().stay.name }} · {{ store.pkg().nights }}n × {{ store.pkg().rooms }}</span><span class="mono">{{ money(store.pkg().stayC) }}</span></div>
+          <div class="ledger-line"><span class="muted">Sightseeing ({{ store.pkg().sights.length }}) × {{ store.tTrav() }}</span><span class="mono">{{ money(store.pkg().sightC) }}</span></div>
+          <div class="ledger-line"><span class="muted">Taxes &amp; fees</span><span class="mono">{{ money(store.pkg().tax) }}</span></div>
+          <div class="ledger-sum"><span>Total</span><span class="price big">{{ money(store.pkg().total) }}</span></div>
+          <div class="ledger-per muted">≈ {{ money(perPerson()) }} / person · {{ store.tDays() }} days</div>
+          <button class="btn primary block" (click)="reserve()">Reserve package<app-icon n="arrow" [s]="17" /></button>
+          <div class="ledger-note"><app-icon n="shield" [s]="13" />Free cancellation up to 48h before</div>
+        </div>
+      </div>
+    </aside>
+  </div>
+</section>

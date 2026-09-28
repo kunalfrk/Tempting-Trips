@@ -1,0 +1,10 @@
+/* faq */
+.faq-list{max-width:720px;margin:0 auto;display:flex;flex-direction:column;gap:10px}
+.faq{overflow:hidden;transition:.25s}
+.faq.open{border-color:rgba(94,234,212,.25)}
+.faq-q{width:100%;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 22px;background:none;border:none;color:var(--ink);font-size:15px;font-weight:500;text-align:left}
+.faq-q:hover{color:var(--acc)}
+.faq-chev{color:var(--ink-2);transition:transform .3s;flex-shrink:0}
+.faq-chev.up{transform:rotate(180deg);color:var(--acc)}
+.faq-a{overflow:hidden;transition:max-height .3s ease}
+.faq-a p{padding:0 22px 18px;color:var(--ink-2);font-size:14px;line-height:1.7}
